@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+<%- include('partials/head') %>
+<body class="bg-light">
+
+<%- include('partials/navbar') %>
+
+    <div class="container mt-5">
+        <h1>Riepilogo Ordini</h1>
+        <br>
+        <% myOrders.forEach(order => { %>
+            <div class="card mb-4">
+                <div class="card-header">
+                    Ordine #<%= order.id %> - <%= order.createdAt.toLocaleDateString() %> - Totale: € <%= order.total %> - Stato: <%= order.status %>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Articoli Ordinati:</h5>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Codice Articolo</th>
+                                <th>Quantità</th>
+                                <th>Prezzo Unitario</th>
+                                <th>Prezzo Totale Articolo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% order.ProductOrders.forEach(productOrder => { %>
+                                <tr>
+                                    <td><%= productOrder.codart %></td>
+                                    <td><%= productOrder.quantity %></td>
+                                    <td>€ <%= productOrder.price %></td>
+                                    <td>€ <%= productOrder.quantity * productOrder.price %></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                    <a href="/order/<%= order.id %>" class="btn btn-primary">Visualizza Dettagli</a>
+                </div>
+            </div>
+
+            <% if (order.status === 'delivered') { %>
+                <% order.ProductOrders.forEach(productOrder => { %>
+                    <% if (productOrder.isReviewed === false) { %>
+                        <div class="mt-4">
+                            <h3>Aggiungi una Recensione per articolo #<%= productOrder.codart  %></h3>
+                            <form action="" method="POST">
+                                <div class="mb-3">
+                                    <label for="text" class="form-label">Testo della Recensione</label>
+                                    <textarea class="form-control" id="text" name="text" rows="3" required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="rating" class="form-label">Valutazione (1-5)</label>
+                                    <input type="number" class="form-control" id="rating" name="rating" min="1" max="5" required>
+                                </div>
+                                <input type="hidden" name="codart" value="">
+                                <button type="submit" class="btn btn-primary">Invia Recensione</button>
+                            </form>
+                        </div>
+
+                    <% } %> 
+                <% }); %>
+            <% } %>
+            <hr>
+        <% }); %>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

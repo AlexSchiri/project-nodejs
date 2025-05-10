@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="it">
+    <%- include('partials/head') %>
+<body>
+    <%- include('partials/navbar') %>
+
+  <h1>Pagamento avvenuto con successo!</h1>
+  <ul>
+    <% lineItems.forEach(item => { %>
+      <li><%= item.quantity %> x <%= item.description %> - <%= item.price.unit_amount / 100 %> EUR</li>
+    <% }); %>
+  </ul>
+  <p>Torna alla <a href="/">Home</a> </p>
+</body>
+</html>

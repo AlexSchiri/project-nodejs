@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+    <%- include('partials/head') %>
+<body>
+
+    <%- include('partials/navbar') %>
+
+    <div class="container mt-5">
+        <h1>Carrello</h1>
+  
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Prodotto</th>
+                    <th>Prezzo</th>
+                    <th>Quantità</th>
+                    <th>Azioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% items.forEach(articolo => { %>
+                <tr>
+                    <td><a href="/articolo/<%= articolo.codart %>"><%= articolo.codart %></a></td>
+                    <td><%= articolo.price %></td>
+                    <td>
+                        <input type="number" class="form-control" value="<%= articolo.qty %>" min="1" onchange="modificaQuantitaCarrello('<%= articolo.id %>', this.value)">
+                    </td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" onclick="eliminaArticoloCarrello('<%= articolo.id %>')">Rimuovi</button>
+                    </td>
+                </tr>
+                <% }); %>
+                </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-end"><strong>Totale:</strong></td>
+                    <td> €</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <% if (messages && messages.success && messages.success.length > 0) { %>
+            <div id="flash" class="alert alert-success">
+              <% messages.success.forEach(message => { %>
+                <p><%= message %></p>
+              <% }); %>
+            </div>
+          <% } %>
+  
+          <% if (messages && messages.error && messages.error.length > 0) { %>
+            <div id="flash" class="alert alert-danger">
+              <% messages.error.forEach(message => { %>
+                <p><%= message %></p>
+              <% }); %>
+            </div>
+          <% } %>
+        
+        <div class="d-flex justify-content-end">
+            <a href="/confirm-order" class="btn btn-primary">Riepilogo ordine</a>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

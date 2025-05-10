@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="it">
+<%- include('partials/head') %>
+<body class="bg-light">
+
+<%- include('partials/navbar') %>
+
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <img src="" alt="Foto Profilo" class="img-fluid rounded-circle mb-3" style="max-width: 150px;">
+                            <h2 class="card-title" id="nome-utente"><%= user.nome %></h2>
+                        </div>
+                        <hr>
+                        
+                        <form method="post" action="/myprofile/edit">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="email-input" class="form-label">Email</label>
+                                        <input type="email" name="email" class="form-control" id="email" value="<%= user.email %>">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="indirizzo-fatturazione-input" class="form-label">Indirizzo di fatturazione</label>
+                                        <input type="text" class="form-control" id="biling" name="billing" value="<%= user.billing %>">
+                                    </div>
+                                     <div class="mb-3">
+                                        <label for="indirizzo-spedizione-input" class="form-label">Indirizzo di spedizione</label>
+                                        <input type="text" class="form-control" id="shipment" name="shipment" value="<%= user.shipment %>">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="citta-input" class="form-label">Città</label>
+                                        <input type="text" class="form-control" id="city" name="city" value="<%= user.city %>">
+                                    </div>
+                                     <div class="mb-3">
+                                        <label for="paese-input" class="form-label">Paese</label>
+                                        <input type="text" class="form-control" id="country" name="country" value="<%= user.country %>">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="telefono-input" class="form-label">Numero di telefono</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" value="<%= user.phone %>">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div>
+                                <!-- <div class="mb-3">
+                                    <label for="pagamento-input" class="form-label">Metodo di pagamento preferito</label>
+                                    <input type="text" class="form-control" id="pagamento-input" value="Carta di credito (**** **** **** 1234)">
+                                </div> -->
+                                <button type="submit" class="btn btn-success btn-sm" >Salva</button>
+                                <button class="btn btn-secondary btn-sm" id="annulla-modifiche">Annulla</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>

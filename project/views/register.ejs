@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <%- include('partials/head') %>
+<body>
+    <%- include('partials/navbar') %>
+    <h1>Registrazione</h1>
+
+    <% if (messages && messages.success && messages.success.length > 0) { %>
+        <div id="flash" class="alert alert-success">
+          <% messages.success.forEach(message => { %>
+            <p><%= message %></p>
+          <% }); %>
+        </div>
+      <% } %>
+    
+    <% if (messages && messages.error && messages.error.length > 0) { %>
+        <div id="flash" class="alert alert-danger">
+          <% messages.error.forEach(message => { %>
+            <p><%= message %></p>
+          <% }); %>
+        </div>
+      <% } %>
+
+    <form action="/auth/register" method="post">
+        <div class="form-group">
+            <input type="text" name="nome" class="form-control" placeholder="Nome" required>
+        </div>
+        <div class="form-group">
+            <input type="email" name="email" class="form-control" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <input type="password" name="password" class="form-control" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn btn-success">Registrati</button>
+    </form>
+    <p>Hai già un account? <a href="/login">Login</a></p>
+</body>
+</html>
