@@ -1,1 +1,1 @@
-A simple nodeJs e-commerce. Please activate faker library to seeds data (on Sql server).
+A simple nodeJs e-commerce. Activate (decomment) faker library to seeds data (on Sql server).
